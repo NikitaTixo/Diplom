@@ -160,11 +160,11 @@ def predict_name(test_image):
 image = Image.open('Frame 48099524.jpg')
 
 # Отобразите изображение на странице Streamlit
-st.image(image, caption='Изображение для детекции', use_column_width=True)
+st.image(image, caption='Изображение для детекции', use_container_width=True)
 uploaded_file = st.file_uploader("Выберите изображение для детекции", type=["jpg", "jpeg", "png"])
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption='Оригинальное изображение', use_column_width=True)
+    st.image(image, caption='Оригинальное изображение', use_container_width=True)
 
     # Detect objects in image
     results = model.predict(image)
@@ -175,8 +175,8 @@ if uploaded_file is not None:
     # Plot bounding boxes on image
     image_np = np.array(image)
     image_np = plot_bboxes(image_np, results[0].boxes.data, labels=labels, colors=[(255, 0, 0), (0, 255, 0), (0, 0, 255)])
-    st.image(image_np, caption='Результаты детекции', use_column_width=True)
+    st.image(image_np, caption='Результаты детекции', use_container_width=True)
 
     # Predict the name of the image
     result_image = predict_name(uploaded_file.name)
-    st.image(result_image, caption='Результаты детекции', use_column_width=True)
+    st.image(result_image, caption='Результаты детекции', use_container_width=True)
