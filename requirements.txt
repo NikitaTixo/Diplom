@@ -1,6 +1,6 @@
 streamlit
 pillow
 numpy
-opencv-python-headless==4.7.0.72
-ultralytics==8.0.145
+opencv-python-headless
+ultralytics
 pyyaml
