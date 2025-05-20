@@ -2,5 +2,5 @@ streamlit
 pillow
 numpy
 opencv-python==4.5.5.64
-ultralytics
+ultralytics==8.0.145
 pyyaml
