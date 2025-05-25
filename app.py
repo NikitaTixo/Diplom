@@ -184,7 +184,7 @@ if image_paths:
         try:
             st.markdown(f"Обработка: {os.path.basename(path)}")
             result_image = predict_name(os.path.basename(path))
-            st.image(result_image, caption=f'Результат: {os.path.basename(path)}', use_column_width=True)
+            st.image(result_image, caption=f'Результат: {os.path.basename(path)}', use_container_width=True)
             time.sleep(0.5)  # Не обязательно, но может помочь
         except Exception as e:
             st.error(f"Ошибка при обработке {path}: {e}")
@@ -209,3 +209,10 @@ if uploaded_file is not None:
     # Predict the name of the image
     result_image = predict_name(uploaded_file.name)
     st.image(result_image, caption='Результаты детекции', use_container_width=True)
+st.markdown("""
+    <script>
+        setTimeout(function(){
+           window.location.reload(1);
+        }, 10000);
+    </script>
+""", unsafe_allow_html=True)
