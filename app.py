@@ -8,9 +8,23 @@ import yaml
 import tempfile
 import time
 import requests
+import glob
 
 BOT_TOKEN = '8040229917:AAGSVVbPpGol1E-ImXAdLkm2t71Pwf-Zi7A'
 CHAT_ID = '1843576106'
+
+folder_path = "content/images/test"
+
+import glob
+
+# Путь к папке с изображениями
+folder_path = "content/images/test"
+
+# Получаем все изображения
+image_paths = glob.glob(os.path.join(folder_path, "*.jpg")) + \
+              glob.glob(os.path.join(folder_path, "*.jpeg")) + \
+              glob.glob(os.path.join(folder_path, "*.png"))
+
 
 # Отправка сообщения в телеграм
 def send_telegram_photo(photo_path, caption):
@@ -162,6 +176,21 @@ image = Image.open('Frame 48099524.jpg')
 # Отобразите изображение на странице Streamlit
 st.image(image, caption='Изображение для детекции', use_container_width=True)
 uploaded_file = st.file_uploader("Выберите изображение для детекции", type=["jpg", "jpeg", "png"])
+
+if image_paths:
+    st.info(f"Анализирую {len(image_paths)} изображений в папке...")
+
+    for path in image_paths:
+        try:
+            st.markdown(f"Обработка: {os.path.basename(path)}")
+            result_image = predict_name(os.path.basename(path))
+            st.image(result_image, caption=f'Результат: {os.path.basename(path)}', use_column_width=True)
+            time.sleep(0.5)  # Не обязательно, но может помочь
+        except Exception as e:
+            st.error(f"Ошибка при обработке {path}: {e}")
+else:
+    st.warning("В папке нет изображений для анализа.")
+
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Оригинальное изображение', use_container_width=True)
