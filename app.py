@@ -179,13 +179,8 @@ uploaded_file = st.file_uploader("Выберите изображение для
 
 if image_paths:
     st.info(f"Анализирую {len(image_paths)} изображений в папке...")
-    labels = {0: u'__background__', 1: u'helmet', 2: u'vest', 3: u'head'}
     for path in image_paths:
         try:
-            results = model.predict(os.path.basename(path))
-            image_np = np.array(os.path.basename(path))
-            image_np = plot_bboxes(image_np, results[0].boxes.data, labels=labels, colors=[(255, 0, 0), (0, 255, 0), (0, 0, 255)])
-            st.image(image_np, caption='Результаты детекции', use_container_width=True)
             st.markdown(f"Обработка: {os.path.basename(path)}")
             result_image = predict_name(os.path.basename(path))
             st.image(result_image, caption=f'Результат: {os.path.basename(path)}', use_container_width=True)
