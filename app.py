@@ -182,9 +182,8 @@ if image_paths:
     labels = {0: u'__background__', 1: u'helmet', 2: u'vest', 3: u'head'}
     for path in image_paths:
         try:
-            image = Image.open(os.path.basename(path))
-            results = model.predict(image)
-            image_np = np.array(image)
+            results = model.predict(os.path.basename(path))
+            image_np = np.array(os.path.basename(path))
             image_np = plot_bboxes(image_np, results[0].boxes.data, labels=labels, colors=[(255, 0, 0), (0, 255, 0), (0, 0, 255)])
             st.image(image_np, caption='Результаты детекции', use_container_width=True)
             st.markdown(f"Обработка: {os.path.basename(path)}")
