@@ -128,7 +128,7 @@ image = Image.open('Frame 48099524.jpg')
 
 # Function to predict the name of the image
 def predict_name(test_image):
-    labels = {0: u'helmet', 1: u'vest', 2: u'head', 3: u'__background__'}
+    labels = {0: u'__background__', 1: u'helmet', 2: u'vest', 3: u'head'}
     path = f"content/images/test/{test_image}"
 
     results = model.predict(path)
