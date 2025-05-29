@@ -146,6 +146,8 @@ def predict_name(test_image):
 
     send_photo = False
     has_vest = False
+
+    labels = {0: u'helmet', 1: u'vest', 2: u'head', 3: u'__background__'}
     
     for i, (confidence, class_id) in enumerate(zip(conf, cls)):
         label = labels[int(class_id)] 
